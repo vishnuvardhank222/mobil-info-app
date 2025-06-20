@@ -16,21 +16,23 @@ variables:
  packageDir: 'frontend'
 
 steps:
-- task: NodeTool@0
-  inputs: 
-    versionSpec: '18.x'
-  displayName: 'InstallNode.js'
-
-
-- script: |
-    cd ${workingDirectory}
-    npm install
-    npm run build
-  displayName: 'Build react app'
-- task: AzureWebApp@1
-  inputs:
-    azureSubscription: 'azure-mobile-connection'
-    appType: 'webAppLinux'
-    appName: '$(appName)'
-    package: '${workingDirectory}/build'
-  displayName: 'Deploy to Azure App Service'
+  - task: NodeTool@0
+    inputs:
+      versionSpec: '18.x'
+    displayName: 'Install Node.js'
+ 
+  - checkout: self
+ 
+  - script: |
+      cd frontend
+      npm install
+      npm run build
+    displayName: 'Build React App'
+ 
+  - task: AzureWebApp@1
+    inputs:
+     azureSubscription: 'azure-mobile-connection'
+     appType: 'webApp'
+     appName: '$(appName)'
+     package: 'frontend/build'
+    displayName: 'Deploy to Azure App Service'
