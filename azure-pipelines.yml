@@ -31,7 +31,7 @@ steps:
   displayName: 'Build react app'
 - task: AzureWebApp@1
   inputs:
-    azureSubscription: 'c8bfd7a6-526a-4f28-b3fd-4758fe5856e2'
+    azureSubscription: 'azure-mobile-connection'
     appType: 'webAppLinux'
     appName: '$(appName)'
     package: '$(packageDir)/build'
