@@ -19,7 +19,7 @@ steps:
 - task: NodeTool@0
   inputs: 
     versionSpec: '18.x'
-  displayname: 'InstallNode.js'
+  displayName: 'InstallNode.js'
 
 
 - script: |
@@ -28,4 +28,11 @@ steps:
     cd ${packageDir}
     npm install
     npm run build
-  displayName: 'Run a multi-line script'
+  displayName: 'Build react app'
+- task: AzureWebApp@1
+  inputs:
+    azureSubscription: 'c8bfd7a6-526a-4f28-b3fd-4758fe5856e2'
+    appType: 'webAppLinux'
+    appName: '$(appName)'
+    package: '$(packageDir)/build'
+  displayName: 'Deploy to Azure App Service'
