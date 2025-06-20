@@ -23,9 +23,7 @@ steps:
 
 
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-    cd ${packageDir}
+    cd ${workingDirectory}
     npm install
     npm run build
   displayName: 'Build react app'
@@ -34,5 +32,5 @@ steps:
     azureSubscription: 'azure-mobile-connection'
     appType: 'webAppLinux'
     appName: '$(appName)'
-    package: '$(packageDir)/build'
+    package: '${workingDirectory}/build'
   displayName: 'Deploy to Azure App Service'
